@@ -1,13 +1,11 @@
 name: Project Builds
-run-name: ${{ github.actor }} is building project on ${{ gthub.server_url }}
+run-name: ${{ github.actor }} is building project on ${{ github.server_url }}
 on:
   push:
     branches:
       - main
-
 env:
   PLATFORM: casper
-
 jobs:
   build-binaries:
     runs-on: ubuntu-latest
