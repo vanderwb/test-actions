@@ -1,0 +1,25 @@
+name: Test Changes
+run-name: ${{ github.actor }} is testing the project on ${{ github.server_url }}
+
+on:
+  pull_request:
+    types:
+      - labeled
+    branches:
+      - main
+
+jobs:
+  build-and-run:
+    runs-on: derecho-runner
+    if: ${{ github.event.label.name == 'run-pr-tests' }}
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Run make
+        run: make
+      - name: Run test
+        run: make check
+      - name: Run clean
+        run: make clean
+      - run: echo "This job's status is ${{ job.status }}."
