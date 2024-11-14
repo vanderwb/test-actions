@@ -7,6 +7,7 @@ on:
 jobs:
   say-hello:
     runs-on: hpc-runner
+    if: github.repository == 'vanderwb/test-actions'
 
     steps:
       - run: echo "Push by ${{ github.actor }}"
