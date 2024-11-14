@@ -1,0 +1,12 @@
+name: Confirm Push
+run-name: ${{ github.actor }} has triggered a push action
+
+on:
+  push
+
+jobs:
+  say-hello:
+    runs-on: hpc-runner
+
+    steps:
+      - run: echo "Push by ${{ github.actor }}"
