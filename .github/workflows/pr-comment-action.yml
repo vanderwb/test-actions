@@ -2,16 +2,18 @@ name: Test Changes
 run-name: ${{ github.actor }} is testing the project on ${{ github.server_url }}
 
 on:
-  pull_request:
+  issue_comment:
     types:
-      - labeled
+      - created
 
 jobs:
   build-and-run:
     runs-on: hpc-runner
     if: |
-      github.event.label.name == 'run-pr-tests' &&
-      github.repository == 'vanderwb/test-actions'
+      github.repository == 'vanderwb/test-actions'              &&
+      github.event.issue.pull_request                           &&
+      contains(github.event.comment.body, '/run-pr-tests')      &&
+      github.event.comment.author_association == 'COLLABORATOR'
 
     steps:
       - name: Check out repository code
