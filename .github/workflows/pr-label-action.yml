@@ -10,8 +10,10 @@ on:
 
 jobs:
   build-and-run:
-    runs-on: derecho-runner
-    if: ${{ github.event.label.name == 'run-pr-tests' }}
+    runs-on: hpc-runner
+    if: |
+      github.event.label.name == 'run-pr-tests' &&
+      github.repository == 'vanderwb/test-actions'
 
     steps:
       - name: Check out repository code
